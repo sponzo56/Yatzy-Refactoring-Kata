@@ -1,6 +1,4 @@
 public interface IRoll {
 
-    int nbDice = 5;
-
-    long getScore(Roll roll);
+    long getScore(YatzyRoll roll);
 }

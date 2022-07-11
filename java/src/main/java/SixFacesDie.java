@@ -1,8 +1,9 @@
-public class Die implements IDie {
+public class SixFacesDie implements IDie {
 
+    public static int nbFaces = 6;
     private int face;
 
-    public Die(int face) {
+    public SixFacesDie(int face) {
         this.face = face;
     }
 

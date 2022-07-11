@@ -1,39 +1,40 @@
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class Roll implements IRoll {
+public class YatzyRoll implements IRoll {
 
-    private final List<Die> listDice;
+    public static  int nbDice = 5;
+    private final List<IDie> listDice;
     private final Category category;
 
-    public Roll(List<Die> listDice, Category category) {
+    public YatzyRoll(List<IDie> listDice, Category category) {
         this.listDice = listDice;
         this.category = category;
     }
 
-    public static long countDiceWithFaceValue(int faceValue, List<Die> listDice) {
+    public static long countDiceWithFaceValue(int faceValue, List<IDie> listDice) {
         return listDice.stream().filter(d -> d.getFaceValue() == faceValue)
             .count();
     }
 
-    public static Map<Integer, Long> getRollComposition(List<Die> listDice) {
+    public static Map<Integer, Long> getRollComposition(List<IDie> listDice) {
         Map<Integer, Long> composition = new HashMap<>();
-        IntStream facesRange = IntStream.range(1, Die.nbFaces + 1);
+        IntStream facesRange = IntStream.range(1, SixFacesDie.nbFaces + 1);
         facesRange.forEach(f -> {
-            if (Roll.countDiceWithFaceValue(f, listDice) != 0) {
-                composition.put(f,Roll.countDiceWithFaceValue(f, listDice));
+            if (YatzyRoll.countDiceWithFaceValue(f, listDice) != 0) {
+                composition.put(f, YatzyRoll.countDiceWithFaceValue(f, listDice));
             }
         });
         return composition;
     }
 
     @Override
-    public long getScore(Roll roll) {
+    public long getScore(YatzyRoll roll) {
         Map<Integer, Long> rollComposition = getRollComposition(roll.listDice);
         long score = 0;
         switch (roll.category) {
             case CHANCE:
-                score = roll.listDice.stream().map(Die::getFaceValue).reduce(0, Integer::sum);
+                score = roll.listDice.stream().map(IDie::getFaceValue).reduce(0, Integer::sum);
                 break;
             case YATZY:
                 score = rollComposition.size() == 1 ? 50L : 0L;
@@ -73,18 +74,18 @@ public class Roll implements IRoll {
                 if (rollComposition.size() == 1) score = rollComposition.keySet().stream().reduce(0, Integer::sum) * 4;
                 break;
             case SMALL_STRAIGHT:
-                if (rollComposition.keySet().size() == Roll.nbDice
+                if (rollComposition.keySet().size() == YatzyRoll.nbDice
                     && Collections.min(rollComposition.keySet()) == 1
                     && Collections.max(rollComposition.keySet()) == 5) score = 15L;
                 break;
             case LARGE_STRAIGHT:
-                if (rollComposition.keySet().size() == Roll.nbDice
+                if (rollComposition.keySet().size() == YatzyRoll.nbDice
                     && Collections.min(rollComposition.keySet()) == 2
                     && Collections.max(rollComposition.keySet()) == 6) score = 20L;
                 break;
             case FULL_HOUSE:
                 if (rollComposition.containsValue(2L) && rollComposition.containsValue(3L))
-                    score = roll.listDice.stream().map(Die::getFaceValue).reduce(0, Integer::sum);
+                    score = roll.listDice.stream().map(IDie::getFaceValue).reduce(0, Integer::sum);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + roll.category);

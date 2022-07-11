@@ -12,195 +12,195 @@ public class YatzyTest {
 
     @Test
     void countDiceWithFaceValue() {
-        List<Die> listFaces = Collections.EMPTY_LIST;
+        List<IDie> listFaces = Collections.EMPTY_LIST;
         Collections.addAll(listFaces = new ArrayList<>(),
-            new Die(6), new Die(6), new Die(6),
-            new Die(3), new Die(3));
+            new SixFacesDie(6), new SixFacesDie(6), new SixFacesDie(6),
+            new SixFacesDie(3), new SixFacesDie(3));
         int faceValue = 6;
-        assertEquals(3L, Roll.countDiceWithFaceValue(faceValue, listFaces));
+        assertEquals(3L, YatzyRoll.countDiceWithFaceValue(faceValue, listFaces));
     }
 
     @Test
     void getRollComposition() {
-        List<Die> listFaces = Collections.EMPTY_LIST;
+        List<IDie> listFaces = Collections.EMPTY_LIST;
         Collections.addAll(listFaces = new ArrayList<>(),
-            new Die(6), new Die(6), new Die(6),
-            new Die(3), new Die(3));
+            new SixFacesDie(6), new SixFacesDie(6), new SixFacesDie(6),
+            new SixFacesDie(3), new SixFacesDie(3));
         Map<Integer, Long> composition = new HashMap<>();
         composition.put(3, 2L);
         composition.put(6, 3L);
-        assertEquals(composition, Roll.getRollComposition(listFaces));
+        assertEquals(composition, YatzyRoll.getRollComposition(listFaces));
     }
 
     @ParameterizedTest
     @MethodSource("provideArgumentsForGetScore")
-    void getScore_ShouldReturnScoreForValidRoll(Roll roll, long score) {
+    void getScore_ShouldReturnScoreForValidRoll(YatzyRoll roll, long score) {
         assertEquals(score, roll.getScore(roll));
     }
 
     private static Stream<Arguments> provideArgumentsForGetScore() {
 
-        List<Die> listFacesChance = Collections.EMPTY_LIST;
+        List<IDie> listFacesChance = Collections.EMPTY_LIST;
         Collections.addAll(listFacesChance = new ArrayList<>(),
-            new Die(1), new Die(1), new Die(2),
-            new Die(3), new Die(5));
-        Roll rollChance = new Roll(listFacesChance, Category.CHANCE);
+            new SixFacesDie(1), new SixFacesDie(1), new SixFacesDie(2),
+            new SixFacesDie(3), new SixFacesDie(5));
+        YatzyRoll rollChance = new YatzyRoll(listFacesChance, Category.CHANCE);
 
-        List<Die> listFacesOnes = Collections.EMPTY_LIST;
+        List<IDie> listFacesOnes = Collections.EMPTY_LIST;
         Collections.addAll(listFacesOnes = new ArrayList<>(),
-            new Die(1), new Die(1), new Die(2),
-            new Die(3), new Die(5));
-        Roll rollOnes = new Roll(listFacesOnes, Category.ONES);
+            new SixFacesDie(1), new SixFacesDie(1), new SixFacesDie(2),
+            new SixFacesDie(3), new SixFacesDie(5));
+        YatzyRoll rollOnes = new YatzyRoll(listFacesOnes, Category.ONES);
 
-        List<Die> listFacesTwos = Collections.EMPTY_LIST;
+        List<IDie> listFacesTwos = Collections.EMPTY_LIST;
         Collections.addAll(listFacesTwos = new ArrayList<>(),
-            new Die(1), new Die(1), new Die(2),
-            new Die(2), new Die(2));
-        Roll rollTwos = new Roll(listFacesTwos, Category.TWOS);
+            new SixFacesDie(1), new SixFacesDie(1), new SixFacesDie(2),
+            new SixFacesDie(2), new SixFacesDie(2));
+        YatzyRoll rollTwos = new YatzyRoll(listFacesTwos, Category.TWOS);
 
-        List<Die> listFacesThrees = Collections.EMPTY_LIST;
+        List<IDie> listFacesThrees = Collections.EMPTY_LIST;
         Collections.addAll(listFacesThrees = new ArrayList<>(),
-            new Die(1), new Die(3), new Die(2),
-            new Die(2), new Die(3));
-        Roll rollThrees = new Roll(listFacesThrees, Category.THREES);
+            new SixFacesDie(1), new SixFacesDie(3), new SixFacesDie(2),
+            new SixFacesDie(2), new SixFacesDie(3));
+        YatzyRoll rollThrees = new YatzyRoll(listFacesThrees, Category.THREES);
 
-        List<Die> listFacesFours = Collections.EMPTY_LIST;
+        List<IDie> listFacesFours = Collections.EMPTY_LIST;
         Collections.addAll(listFacesFours = new ArrayList<>(),
-            new Die(4), new Die(3), new Die(2),
-            new Die(2), new Die(3));
-        Roll rollFours = new Roll(listFacesFours, Category.FOURS);
+            new SixFacesDie(4), new SixFacesDie(3), new SixFacesDie(2),
+            new SixFacesDie(2), new SixFacesDie(3));
+        YatzyRoll rollFours = new YatzyRoll(listFacesFours, Category.FOURS);
 
-        List<Die> listFacesFives = Collections.EMPTY_LIST;
+        List<IDie> listFacesFives = Collections.EMPTY_LIST;
         Collections.addAll(listFacesFives = new ArrayList<>(),
-            new Die(4), new Die(5), new Die(2),
-            new Die(2), new Die(3));
-        Roll rollFives = new Roll(listFacesFives, Category.FIVES);
+            new SixFacesDie(4), new SixFacesDie(5), new SixFacesDie(2),
+            new SixFacesDie(2), new SixFacesDie(3));
+        YatzyRoll rollFives = new YatzyRoll(listFacesFives, Category.FIVES);
 
-        List<Die> listFacesSixes = Collections.EMPTY_LIST;
+        List<IDie> listFacesSixes = Collections.EMPTY_LIST;
         Collections.addAll(listFacesSixes = new ArrayList<>(),
-            new Die(4), new Die(5), new Die(2),
-            new Die(6), new Die(6));
-        Roll rollSixes = new Roll(listFacesSixes, Category.SIXES);
+            new SixFacesDie(4), new SixFacesDie(5), new SixFacesDie(2),
+            new SixFacesDie(6), new SixFacesDie(6));
+        YatzyRoll rollSixes = new YatzyRoll(listFacesSixes, Category.SIXES);
 
-        List<Die> listFacesInvalidYatzy = Collections.EMPTY_LIST;
+        List<IDie> listFacesInvalidYatzy = Collections.EMPTY_LIST;
         Collections.addAll(listFacesInvalidYatzy = new ArrayList<>(),
-            new Die(4), new Die(5), new Die(2),
-            new Die(6), new Die(6));
-        Roll rollInvalidYatzy = new Roll(listFacesInvalidYatzy, Category.YATZY);
+            new SixFacesDie(4), new SixFacesDie(5), new SixFacesDie(2),
+            new SixFacesDie(6), new SixFacesDie(6));
+        YatzyRoll rollInvalidYatzy = new YatzyRoll(listFacesInvalidYatzy, Category.YATZY);
 
-        List<Die> listFacesValidYatzy = Collections.EMPTY_LIST;
+        List<IDie> listFacesValidYatzy = Collections.EMPTY_LIST;
         Collections.addAll(listFacesValidYatzy = new ArrayList<>(),
-            new Die(2), new Die(2), new Die(2),
-            new Die(2), new Die(2));
-        Roll rollValidYatzy = new Roll(listFacesValidYatzy, Category.YATZY);
+            new SixFacesDie(2), new SixFacesDie(2), new SixFacesDie(2),
+            new SixFacesDie(2), new SixFacesDie(2));
+        YatzyRoll rollValidYatzy = new YatzyRoll(listFacesValidYatzy, Category.YATZY);
 
-        List<Die> listFacesInvalidYatzy2 = Collections.EMPTY_LIST;
+        List<IDie> listFacesInvalidYatzy2 = Collections.EMPTY_LIST;
         Collections.addAll(listFacesInvalidYatzy2 = new ArrayList<>(),
-            new Die(2), new Die(6), new Die(2),
-            new Die(2), new Die(2));
-        Roll rollInvalidYatzy2 = new Roll(listFacesInvalidYatzy2, Category.YATZY);
+            new SixFacesDie(2), new SixFacesDie(6), new SixFacesDie(2),
+            new SixFacesDie(2), new SixFacesDie(2));
+        YatzyRoll rollInvalidYatzy2 = new YatzyRoll(listFacesInvalidYatzy2, Category.YATZY);
 
-        List<Die> listFacesPair = Collections.EMPTY_LIST;
+        List<IDie> listFacesPair = Collections.EMPTY_LIST;
         Collections.addAll(listFacesPair = new ArrayList<>(),
-            new Die(2), new Die(6), new Die(2),
-            new Die(2), new Die(2));
-        Roll rollPair = new Roll(listFacesPair, Category.PAIR);
+            new SixFacesDie(2), new SixFacesDie(6), new SixFacesDie(2),
+            new SixFacesDie(2), new SixFacesDie(2));
+        YatzyRoll rollPair = new YatzyRoll(listFacesPair, Category.PAIR);
 
-        List<Die> listFacesMaxPair = Collections.EMPTY_LIST;
+        List<IDie> listFacesMaxPair = Collections.EMPTY_LIST;
         Collections.addAll(listFacesMaxPair = new ArrayList<>(),
-            new Die(2), new Die(6), new Die(5),
-            new Die(2), new Die(5));
-        Roll rollMaxPair = new Roll(listFacesMaxPair, Category.PAIR);
+            new SixFacesDie(2), new SixFacesDie(6), new SixFacesDie(5),
+            new SixFacesDie(2), new SixFacesDie(5));
+        YatzyRoll rollMaxPair = new YatzyRoll(listFacesMaxPair, Category.PAIR);
 
-        List<Die> listFacesInvalidPair = Collections.EMPTY_LIST;
+        List<IDie> listFacesInvalidPair = Collections.EMPTY_LIST;
         Collections.addAll(listFacesInvalidPair = new ArrayList<>(),
-            new Die(1), new Die(2), new Die(4),
-            new Die(3), new Die(5));
-        Roll rollInvalidPair = new Roll(listFacesInvalidPair, Category.PAIR);
+            new SixFacesDie(1), new SixFacesDie(2), new SixFacesDie(4),
+            new SixFacesDie(3), new SixFacesDie(5));
+        YatzyRoll rollInvalidPair = new YatzyRoll(listFacesInvalidPair, Category.PAIR);
 
-        List<Die> listFacesTwoPairs = Collections.EMPTY_LIST;
+        List<IDie> listFacesTwoPairs = Collections.EMPTY_LIST;
         Collections.addAll(listFacesTwoPairs = new ArrayList<>(),
-            new Die(2), new Die(2), new Die(4),
-            new Die(5), new Die(5));
-        Roll rollTwoPairs = new Roll(listFacesTwoPairs, Category.TWO_PAIRS);
+            new SixFacesDie(2), new SixFacesDie(2), new SixFacesDie(4),
+            new SixFacesDie(5), new SixFacesDie(5));
+        YatzyRoll rollTwoPairs = new YatzyRoll(listFacesTwoPairs, Category.TWO_PAIRS);
 
-        List<Die> listFacesInvalidTwoPairs = Collections.EMPTY_LIST;
+        List<IDie> listFacesInvalidTwoPairs = Collections.EMPTY_LIST;
         Collections.addAll(listFacesInvalidTwoPairs = new ArrayList<>(),
-            new Die(2), new Die(2), new Die(4),
-            new Die(2), new Die(2));
-        Roll rollInvalidTwoPairs = new Roll(listFacesInvalidTwoPairs, Category.TWO_PAIRS);
+            new SixFacesDie(2), new SixFacesDie(2), new SixFacesDie(4),
+            new SixFacesDie(2), new SixFacesDie(2));
+        YatzyRoll rollInvalidTwoPairs = new YatzyRoll(listFacesInvalidTwoPairs, Category.TWO_PAIRS);
 
-        List<Die> listFacesThreeOfAKind = Collections.EMPTY_LIST;
+        List<IDie> listFacesThreeOfAKind = Collections.EMPTY_LIST;
         Collections.addAll(listFacesThreeOfAKind = new ArrayList<>(),
-            new Die(2), new Die(2), new Die(4),
-            new Die(2), new Die(2));
-        Roll rollThreeOfAKind = new Roll(listFacesThreeOfAKind, Category.THREE_OF_A_KIND);
+            new SixFacesDie(2), new SixFacesDie(2), new SixFacesDie(4),
+            new SixFacesDie(2), new SixFacesDie(2));
+        YatzyRoll rollThreeOfAKind = new YatzyRoll(listFacesThreeOfAKind, Category.THREE_OF_A_KIND);
 
-        List<Die> listFacesThreeOfAKind2 = Collections.EMPTY_LIST;
+        List<IDie> listFacesThreeOfAKind2 = Collections.EMPTY_LIST;
         Collections.addAll(listFacesThreeOfAKind2 = new ArrayList<>(),
-            new Die(6), new Die(2), new Die(4),
-            new Die(6), new Die(6));
-        Roll rollThreeOfAKind2 = new Roll(listFacesThreeOfAKind2, Category.THREE_OF_A_KIND);
+            new SixFacesDie(6), new SixFacesDie(2), new SixFacesDie(4),
+            new SixFacesDie(6), new SixFacesDie(6));
+        YatzyRoll rollThreeOfAKind2 = new YatzyRoll(listFacesThreeOfAKind2, Category.THREE_OF_A_KIND);
 
-        List<Die> listFacesInvalidThreeOfAKind = Collections.EMPTY_LIST;
+        List<IDie> listFacesInvalidThreeOfAKind = Collections.EMPTY_LIST;
         Collections.addAll(listFacesInvalidThreeOfAKind = new ArrayList<>(),
-            new Die(5), new Die(2), new Die(4),
-            new Die(6), new Die(6));
-        Roll rollInvalidThreeOfAKind = new Roll(listFacesInvalidThreeOfAKind, Category.THREE_OF_A_KIND);
+            new SixFacesDie(5), new SixFacesDie(2), new SixFacesDie(4),
+            new SixFacesDie(6), new SixFacesDie(6));
+        YatzyRoll rollInvalidThreeOfAKind = new YatzyRoll(listFacesInvalidThreeOfAKind, Category.THREE_OF_A_KIND);
 
-        List<Die> listFacesFourOfAKind = Collections.EMPTY_LIST;
+        List<IDie> listFacesFourOfAKind = Collections.EMPTY_LIST;
         Collections.addAll(listFacesFourOfAKind = new ArrayList<>(),
-            new Die(2), new Die(2), new Die(2),
-            new Die(2), new Die(5));
-        Roll rollFourOfAKind = new Roll(listFacesFourOfAKind, Category.FOUR_OF_A_KIND);
+            new SixFacesDie(2), new SixFacesDie(2), new SixFacesDie(2),
+            new SixFacesDie(2), new SixFacesDie(5));
+        YatzyRoll rollFourOfAKind = new YatzyRoll(listFacesFourOfAKind, Category.FOUR_OF_A_KIND);
 
-        List<Die> listFacesFourOfAKind2 = Collections.EMPTY_LIST;
+        List<IDie> listFacesFourOfAKind2 = Collections.EMPTY_LIST;
         Collections.addAll(listFacesFourOfAKind2 = new ArrayList<>(),
-            new Die(6), new Die(6), new Die(6),
-            new Die(6), new Die(6));
-        Roll rollFourOfAKind2 = new Roll(listFacesFourOfAKind2, Category.FOUR_OF_A_KIND);
+            new SixFacesDie(6), new SixFacesDie(6), new SixFacesDie(6),
+            new SixFacesDie(6), new SixFacesDie(6));
+        YatzyRoll rollFourOfAKind2 = new YatzyRoll(listFacesFourOfAKind2, Category.FOUR_OF_A_KIND);
 
-        List<Die> listFacesInvalidFourOfAKind = Collections.EMPTY_LIST;
+        List<IDie> listFacesInvalidFourOfAKind = Collections.EMPTY_LIST;
         Collections.addAll(listFacesInvalidFourOfAKind = new ArrayList<>(),
-            new Die(5), new Die(5), new Die(5),
-            new Die(2), new Die(2));
-        Roll rollInvalidFourOfAKind = new Roll(listFacesInvalidFourOfAKind, Category.FOUR_OF_A_KIND);
+            new SixFacesDie(5), new SixFacesDie(5), new SixFacesDie(5),
+            new SixFacesDie(2), new SixFacesDie(2));
+        YatzyRoll rollInvalidFourOfAKind = new YatzyRoll(listFacesInvalidFourOfAKind, Category.FOUR_OF_A_KIND);
 
-        List<Die> listFacesSmallStraight = Collections.EMPTY_LIST;
+        List<IDie> listFacesSmallStraight = Collections.EMPTY_LIST;
         Collections.addAll(listFacesSmallStraight = new ArrayList<>(),
-            new Die(1), new Die(5), new Die(4),
-            new Die(2), new Die(3));
-        Roll rollSmallStraight = new Roll(listFacesSmallStraight, Category.SMALL_STRAIGHT);
+            new SixFacesDie(1), new SixFacesDie(5), new SixFacesDie(4),
+            new SixFacesDie(2), new SixFacesDie(3));
+        YatzyRoll rollSmallStraight = new YatzyRoll(listFacesSmallStraight, Category.SMALL_STRAIGHT);
 
-        List<Die> listFacesInvalidSmallStraight = Collections.EMPTY_LIST;
+        List<IDie> listFacesInvalidSmallStraight = Collections.EMPTY_LIST;
         Collections.addAll(listFacesInvalidSmallStraight = new ArrayList<>(),
-            new Die(1), new Die(6), new Die(4),
-            new Die(2), new Die(3));
-        Roll rollInvalidSmallStraight = new Roll(listFacesInvalidSmallStraight, Category.SMALL_STRAIGHT);
+            new SixFacesDie(1), new SixFacesDie(6), new SixFacesDie(4),
+            new SixFacesDie(2), new SixFacesDie(3));
+        YatzyRoll rollInvalidSmallStraight = new YatzyRoll(listFacesInvalidSmallStraight, Category.SMALL_STRAIGHT);
 
-        List<Die> listFacesLargeStraight = Collections.EMPTY_LIST;
+        List<IDie> listFacesLargeStraight = Collections.EMPTY_LIST;
         Collections.addAll(listFacesLargeStraight = new ArrayList<>(),
-            new Die(6), new Die(5), new Die(4),
-            new Die(2), new Die(3));
-        Roll rollLargeStraight = new Roll(listFacesLargeStraight, Category.LARGE_STRAIGHT);
+            new SixFacesDie(6), new SixFacesDie(5), new SixFacesDie(4),
+            new SixFacesDie(2), new SixFacesDie(3));
+        YatzyRoll rollLargeStraight = new YatzyRoll(listFacesLargeStraight, Category.LARGE_STRAIGHT);
 
-        List<Die> listFacesInvalidLargeStraight = Collections.EMPTY_LIST;
+        List<IDie> listFacesInvalidLargeStraight = Collections.EMPTY_LIST;
         Collections.addAll(listFacesInvalidLargeStraight = new ArrayList<>(),
-            new Die(1), new Die(6), new Die(4),
-            new Die(2), new Die(3));
-        Roll rollInvalidLargeStraight = new Roll(listFacesInvalidLargeStraight, Category.LARGE_STRAIGHT);
+            new SixFacesDie(1), new SixFacesDie(6), new SixFacesDie(4),
+            new SixFacesDie(2), new SixFacesDie(3));
+        YatzyRoll rollInvalidLargeStraight = new YatzyRoll(listFacesInvalidLargeStraight, Category.LARGE_STRAIGHT);
 
-        List<Die> listFacesFullHouse = Collections.EMPTY_LIST;
+        List<IDie> listFacesFullHouse = Collections.EMPTY_LIST;
         Collections.addAll(listFacesFullHouse = new ArrayList<>(),
-            new Die(6), new Die(6), new Die(6),
-            new Die(3), new Die(3));
-        Roll rollFullHouse = new Roll(listFacesFullHouse, Category.FULL_HOUSE);
+            new SixFacesDie(6), new SixFacesDie(6), new SixFacesDie(6),
+            new SixFacesDie(3), new SixFacesDie(3));
+        YatzyRoll rollFullHouse = new YatzyRoll(listFacesFullHouse, Category.FULL_HOUSE);
 
-        List<Die> listFacesInvalidFullHouse = Collections.EMPTY_LIST;
+        List<IDie> listFacesInvalidFullHouse = Collections.EMPTY_LIST;
         Collections.addAll(listFacesInvalidFullHouse = new ArrayList<>(),
-            new Die(6), new Die(6), new Die(4),
-            new Die(3), new Die(3));
-        Roll rollInvalidFullHouse = new Roll(listFacesInvalidFullHouse, Category.FULL_HOUSE);
+            new SixFacesDie(6), new SixFacesDie(6), new SixFacesDie(4),
+            new SixFacesDie(3), new SixFacesDie(3));
+        YatzyRoll rollInvalidFullHouse = new YatzyRoll(listFacesInvalidFullHouse, Category.FULL_HOUSE);
 
         return Stream.of(
             Arguments.of(rollChance, 12L),
