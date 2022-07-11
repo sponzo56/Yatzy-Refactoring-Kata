@@ -1,4 +1,3 @@
-import org.junit.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -11,6 +10,27 @@ import static org.junit.Assert.*;
 
 public class YatzyTest {
 
+    @Test
+    void countDiceWithFaceValue() {
+        List<Die> listFaces = Collections.EMPTY_LIST;
+        Collections.addAll(listFaces = new ArrayList<>(),
+            new Die(6), new Die(6), new Die(6),
+            new Die(3), new Die(3));
+        int faceValue = 6;
+        assertEquals(3L, Roll.countDiceWithFaceValue(faceValue, listFaces));
+    }
+
+    @Test
+    void getRollComposition() {
+        List<Die> listFaces = Collections.EMPTY_LIST;
+        Collections.addAll(listFaces = new ArrayList<>(),
+            new Die(6), new Die(6), new Die(6),
+            new Die(3), new Die(3));
+        Map<Integer, Long> composition = new HashMap<>();
+        composition.put(3, 2L);
+        composition.put(6, 3L);
+        assertEquals(composition, Roll.getRollComposition(listFaces));
+    }
 
     @ParameterizedTest
     @MethodSource("provideArgumentsForGetScore")
@@ -211,27 +231,5 @@ public class YatzyTest {
             Arguments.of(rollFullHouse, 24L),
             Arguments.of(rollInvalidFullHouse, 0L)
         );
-    }
-
-    @Test
-    void countDiceWithFaceValue() {
-        List<Die> listFaces = Collections.EMPTY_LIST;
-        Collections.addAll(listFaces = new ArrayList<>(),
-            new Die(6), new Die(6), new Die(6),
-            new Die(3), new Die(3));
-        int faceValue = 6;
-        assertEquals(3L, Roll.countDiceWithFaceValue(faceValue, listFaces));
-    }
-
-    @Test
-    void getRollComposition() {
-        List<Die> listFaces = Collections.EMPTY_LIST;
-        Collections.addAll(listFaces = new ArrayList<>(),
-            new Die(6), new Die(6), new Die(6),
-            new Die(3), new Die(3));
-        Map<Integer, Long> composition = new HashMap<>();
-        composition.put(3, 2L);
-        composition.put(6, 3L);
-        assertEquals(composition, Roll.getRollComposition(listFaces));
     }
 }

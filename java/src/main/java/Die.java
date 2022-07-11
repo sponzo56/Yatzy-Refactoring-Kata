@@ -6,6 +6,7 @@ public class Die implements IDie {
         this.face = face;
     }
 
+    @Override
     public int getFaceValue() {
         return this.face;
     }
