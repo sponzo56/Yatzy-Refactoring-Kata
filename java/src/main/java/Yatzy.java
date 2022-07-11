@@ -10,7 +10,7 @@ public class Yatzy {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome to game of Yatzy !");
-        System.out.println("Enter your first die (face number from 0 to 6)");
+        System.out.println("Enter your first die (face number from 1 to 6)");
         Die die1 = new Die(scanner.nextInt());
         System.out.println("Enter your second die");
         Die die2 = new Die(scanner.nextInt());
